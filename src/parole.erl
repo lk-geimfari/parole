@@ -11,9 +11,9 @@
 
 -behavior(gen_server).
 
--export([start/0, add/2, delete/2, lookup/1, get/1]).
--export([init/1, handle_call/3, handle_cast/2,
-         handle_info/2, terminate/2, code_change/3]).
+-export([start/0, add/2, delete/2, lookup/1, get/1, raw_data/0]).
+-export([init/1, handle_call/3, handle_cast/2, handle_info/2,
+         terminate/2, code_change/3]).
 
 %%====================================================================
 %% API functions
