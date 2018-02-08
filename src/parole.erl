@@ -1,3 +1,12 @@
+%%%-------------------------------------------------------------------
+%%% @author Likid Geimfari
+%%% @copyright (C) 2018, Likid Geimfari
+%%% @doc
+%%% Simple key-value server based on gen_server and gb_trees.
+%%% @end
+%%% Created : 08. Feb 2018 10:23 PM
+%%%-------------------------------------------------------------------
+
 -module(parole).
 
 -behavior(gen_server).
