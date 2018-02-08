@@ -59,7 +59,7 @@ handle_call({get, Resource}, _From, State) ->
   {reply, Response, State};
 handle_call({raw}, _From, State) ->
   Response = gb_trees:to_list(State),
-  {reply, Response}.
+  {reply, Response, State}.
 
 handle_cast(_Request, State) ->
   {noreply, State}.
