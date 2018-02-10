@@ -46,11 +46,10 @@ handle_call({add, Resource, Password}, _From, State) ->
   NewState = gb_trees:insert(Resource, Password, State),
   {reply, ok, NewState};
 handle_call({lookup, Resource}, _From, State) ->
-  Response = gb_trees:lookup(Resource, State),
-  case Response of
-    {value, _} -> true;
-    _ -> not_found
-  end,
+  Response = case gb_trees:lookup(Resource, State) of
+               {value, _} -> true;
+               _ -> not_found
+             end,
   {reply, Response, State};
 handle_call({get, Resource}, _From, State) ->
   Response = gb_trees:get(Resource, State),
