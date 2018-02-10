@@ -1,9 +1,9 @@
-parole
-=====
+Parole
+======
 
-An OTP library
+![](/logo.png)
 
-Build
+An OTP client-server password manager based on **gen_server**.
+
+Usage
 -----
-
-    $ rebar3 compile
