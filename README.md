@@ -1,9 +1,7 @@
-Parole
-======
-
 ![](/logo.png)
 
-An OTP client-server password manager based on **gen_server**.
+
+An OTP client-server application for local password managing based on **gen_server**.
 
 Usage
 -----
