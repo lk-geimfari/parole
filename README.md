@@ -24,7 +24,7 @@ Eshell V7.3  (abort with ^G)
 ok
 
 6> parole:lookup(Resource).
-{value,<<"MyNotEncryptedPassword">>}
+true
 
 7> parole:get(Resource).
 <<"MyNotEncryptedPassword">>
