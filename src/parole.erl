@@ -11,8 +11,7 @@
 
 -behavior(gen_server).
 
--export([start/0, add/2, delete/1, lookup/1,
-         get/1, raw_data/0]).
+-export([start/0, add/2, delete/1, lookup/1, get/1]).
 -export([init/1, handle_call/3, handle_cast/2,
          handle_info/2, terminate/2, code_change/3]).
 
@@ -23,7 +22,7 @@
 start() ->
   gen_server:start_link({global, ?MODULE}, ?MODULE, [], []).
 
-add(Resource, Password) ->
+add(Resource, Password) when is_binary(Password) ->
   gen_server:call({global, ?MODULE}, {add, Resource, Password}).
 
 delete(Resource) ->
@@ -34,9 +33,6 @@ lookup(Resource) ->
 
 get(Resource) ->
   gen_server:call({global, ?MODULE}, {get, Resource}).
-
-raw_data() ->
-  gen_server:call({global, ?MODULE}, {raw}).
 
 %%====================================================================
 %% Callback Functions
@@ -54,11 +50,7 @@ handle_call({lookup, Resource}, _From, State) ->
   {reply, Response, State};
 handle_call({get, Resource}, _From, State) ->
   Response = gb_trees:get(Resource, State),
-  {reply, Response, State};
-handle_call({raw}, _From, State) ->
-  Response = gb_trees:to_list(State),
   {reply, Response, State}.
-
 
 handle_cast({delete, Resource}, State) ->
   NewState = gb_trees:delete(Resource, State),
