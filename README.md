@@ -34,5 +34,5 @@ true
 TODO
 ----
 
-- [] Use DETS instead gb_trees
-- [] Add safe encryption algorithm support
+- [ ] Use DETS instead gb_trees
+- [ ] Add safe encryption algorithm support
