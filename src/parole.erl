@@ -11,7 +11,7 @@
 
 -behavior(gen_server).
 
--export([start/0, add/2, delete/1, lookup/1, get/1]).
+-export([start/0, add/2, delete/1, lookup/1, get/1, get/2]).
 -export([init/1, handle_call/3, handle_cast/2,
          handle_info/2, terminate/2, code_change/3]).
 
@@ -34,6 +34,9 @@ lookup(Resource) ->
 get(Resource) ->
   gen_server:call({global, ?MODULE}, {get, Resource}).
 
+get(Resource, decrypted) ->
+  gen_server:call({global, ?MODULE}, {get, Resource, decrypted}).
+
 %%====================================================================
 %% Callback Functions
 %%====================================================================
@@ -43,7 +46,8 @@ init(_Args) ->
   {ok, State}.
 
 handle_call({add, Resource, Password}, _From, State) ->
-  NewState = gb_trees:insert(Resource, Password, State),
+  EncryptedPassword = base64:encode(Password),
+  NewState = gb_trees:insert(Resource, EncryptedPassword, State),
   {reply, ok, NewState};
 handle_call({lookup, Resource}, _From, State) ->
   Response = case gb_trees:lookup(Resource, State) of
@@ -53,7 +57,11 @@ handle_call({lookup, Resource}, _From, State) ->
   {reply, Response, State};
 handle_call({get, Resource}, _From, State) ->
   Response = gb_trees:get(Resource, State),
-  {reply, Response, State}.
+  {reply, Response, State};
+handle_call({get, Resource, decrypted}, _From, State) ->
+  Response = gb_trees:get(Resource, State),
+  DecryptedResponse = base64:decode(Response),
+  {reply, DecryptedResponse, State}.
 
 handle_cast({delete, Resource}, State) ->
   NewState = gb_trees:delete(Resource, State),
