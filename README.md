@@ -26,7 +26,7 @@ ok
 6> parole:lookup(Resource).
 true
 
-7> parole:get(Resource).
+7> parole:get(Resource, decrypted).
 <<"MyNotEncryptedPassword">>
 ```
 
