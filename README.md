@@ -6,6 +6,14 @@ An OTP client-server application for local password managing based on **gen_serv
 Usage
 -----
 
+Run following command:
+
+```
+~ rebar3 build && rebar3 shell
+```
+
+and then you can use it, like this:
+
 ```erlang
 Erlang/OTP 18 [erts-7.3] [source] [64-bit] [smp:4:4] [async-threads:10] [kernel-poll:false]
 
@@ -29,12 +37,6 @@ true
 7> parole:get(Resource, decrypted).
 <<"MyNotEncryptedPassword">>
 ```
-
-
-TODO
-----
-
-- [ ] Add safe encryption algorithm support
 
 
 LICENSE
